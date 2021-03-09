@@ -2,7 +2,7 @@ env:
   RUBY_VERSION: 2.6.6
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  POSTGRES_DB: request_bean_rails
+  POSTGRES_DB: request_bean_rails_test
 
 name: Build
 
@@ -63,9 +63,3 @@ jobs:
           bundler exec rails db:migrate RAILS_ENV=test
       - name: Run tests
         run: bundle exec rspec
-      # - name: Upload coverage results
-      #   uses: actions/upload-artifact@master
-      #   if: always()
-      #   with:
-      #     name: coverage-report
-      #     path: coverage

@@ -10,7 +10,6 @@ class BinsController < ApplicationController
 
   # GET /bins/1 or /bins/1.json
   def show
-    byebug
     @requests = @bin.requests
   end
 

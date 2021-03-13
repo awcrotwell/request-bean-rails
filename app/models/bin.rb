@@ -5,6 +5,7 @@ class Bin < ApplicationRecord
   validates :name, length: { in: 3..50 }
 
   has_many :requests
+  belongs_to :user
 
   private
 

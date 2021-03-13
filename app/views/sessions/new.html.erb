@@ -1,0 +1,19 @@
+<% flash.each do |type, msg| %>
+<div>
+  <%= msg %>
+</div>
+<% end %>
+
+<p>Request Bean Login</p>
+
+<%= form_with url: '/login' do |f| %>
+<%= f.label :email, "Email:" %>
+<%= f.text_field :email %>
+<%= f.label :password, "Password:" %>
+<%= f.password_field :password %>
+<br>
+<%= f.submit %>
+<% end %>
+
+<p>Need an account?</p>
+<%= link_to 'Sign up', new_user_path %>

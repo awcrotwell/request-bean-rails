@@ -1,0 +1,9 @@
+<%= link_to "New Bin", new_bin_path %>
+
+<% @user.bins.each do |bin| %>
+<p> Name </p>
+<%= bin.name %>
+<br />
+<p> URL </p>
+<%= bin.url %>
+<% end %>

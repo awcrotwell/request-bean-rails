@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+.p-2 {
+  padding: 15px;
+}
+
+.m-2 {
+  margin: 15px;
+}
+
+.my-2 {
+  margin: 15px 0;
+}
+
+.my-4 {
+  margin: 30px 0;
+}
+
+.mt-4 {
+  margin: 30px 0 0 0;
+}
+
+.mb-2 {
+  margin: 0 0 15px 0;
+}

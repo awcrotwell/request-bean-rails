@@ -4,15 +4,18 @@
 </div>
 <% end %>
 
-<p>Request Bean Login</p>
+<h1>Request Bean Login</h1>
 
 <%= form_with url: '/login' do |f| %>
-<%= f.label :email, "Email:" %>
-<%= f.text_field :email %>
-<%= f.label :password, "Password:" %>
-<%= f.password_field :password %>
-<br>
-<%= f.submit %>
+<div class="my-4">
+  <%= f.label :email, "Email" %>
+  <%= f.text_field :email %>
+</div>
+<div class="mt-4 mb-2">
+  <%= f.label :password, "Password" %>
+  <%= f.password_field :password %>
+</div>
+<%= f.submit 'Login' %>
 <% end %>
 
 <p>Need an account?</p>

@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
+  skip_before_action :authorized, only: %i[new create]
   before_action :set_user, except: :new
 
-  def new 
+  def new
     @user = User.new
   end
 
   def create
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
-       session[:user_id] = @user.id
-       redirect_to '/'
+      session[:user_id] = @user.id
+      redirect_to '/'
     else
-      flash[:error] = "Wrong username or password"
+      flash[:error] = 'Wrong username or password'
       redirect_to '/login'
     end
   end
@@ -24,11 +26,11 @@ class SessionsController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find_by_email(user_params[:email])
-  end
+    def set_user
+      @user = User.find_by_email(user_params[:email])
+    end
 
-  def user_params
-    params.permit(:email, :password)
-  end
+    def user_params
+      params.permit(:email, :password)
+    end
 end

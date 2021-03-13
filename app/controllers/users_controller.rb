@@ -1,8 +1,10 @@
-class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
-  before_action :set_user, only: %i[ show edit update destroy ]
+# frozen_string_literal: true
 
-  def new 
+class UsersController < ApplicationController
+  skip_before_action :authorized, only: %i[new create]
+  before_action :set_user, only: %i[show edit update destroy]
+
+  def new
     @user = User.new
   end
 
@@ -16,7 +18,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.html do
+          redirect_to @user, notice: 'User was successfully created.'
+        end
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -26,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

@@ -1,6 +1,0 @@
-POST http://localhost:3000/bins/a5515050
-Content-Type: application/json
-
-{
-  "hello" : "yes"
-}

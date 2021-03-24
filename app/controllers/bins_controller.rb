@@ -45,7 +45,8 @@ class BinsController < ApplicationController
     respond_to do |format|
       if @bin.update(bin_params)
         format.html do
-          redirect_to "/bins/#{@bin.url}", notice: 'Bin was successfully updated.'
+          redirect_to "/bins/#{@bin.url}",
+                      notice: 'Bin was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @bin }
       else

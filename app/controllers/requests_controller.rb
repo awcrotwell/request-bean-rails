@@ -22,6 +22,8 @@ class RequestsController < ApplicationController
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def log_request
     bin = Bin.find_by({ url: request.params['bin_url'] })
     @incoming_request = Request.new({
@@ -42,6 +44,8 @@ class RequestsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   private
 

@@ -2,6 +2,8 @@
 
 class BinsController < ApplicationController
   before_action :set_bin, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token
+  skip_before_action :authorized, only: %i[new_request]
 
   # GET /bins or /bins.json
   def index
@@ -20,6 +22,28 @@ class BinsController < ApplicationController
 
   # GET /bins/1/edit
   def edit; end
+
+  # POST /bins/:bin
+  def new_request
+    # associate request with correct bin:
+    # get bin from db that has the bin url from this code: request.params["bin_url"]
+    # get the id of that bin
+    # save that id in the request object
+    bin = Bin.find_by({ url: request.params['bin_url'] })
+    @incoming_request = Request.new({
+                                      payload: request.body,
+                                      bin_id: bin.id
+                                    })
+    # @incoming_request.save!
+
+    respond_to do |format|
+      if @incoming_request.save!
+        format.json { render json: {}, status: :created }
+      else
+        format.json { render json: @bin.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # POST /bins or /bins.json
   def create

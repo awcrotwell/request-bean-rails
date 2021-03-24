@@ -8,7 +8,11 @@
 <p>
   <strong>Url:</strong>
   <%= @bin.url %>
-  <br />
+  <%# <br /> %>
+  
+</p>
+<table>
+  <thead></thead>
   <tbody>
     <% @requests.each do |request| %>
       <tr>
@@ -18,7 +22,6 @@
       </tr>
     <% end %>
   </tbody>
-</p>
-
+</table>
 <%= link_to 'Edit', edit_bin_path(@bin) %> |
 <%= link_to 'Back', bins_path %>

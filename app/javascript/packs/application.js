@@ -11,3 +11,18 @@ require("@rails/activestorage").start();
 require("channels");
 
 import "stylesheets/application";
+
+document.addEventListener("turbo:load", () => {
+  const table = document.getElementById("request-table");
+
+  if (table) {
+    table.addEventListener("click", (e) => {
+      const id = e.target.dataset.id;
+      if (id) {
+        e.preventDefault();
+        const row = document.querySelector(`tr[data-id=request-${id}]`);
+        row.classList.toggle("hidden");
+      }
+    });
+  }
+});

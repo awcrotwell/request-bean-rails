@@ -17,25 +17,92 @@
   <%= @bin.webhook_url %>
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>HTTP-Method</th>
-      <th>Timestamp</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="table_data">
-    <% @requests.each do |request| %>
-      <tr>
-        <td><%= request.http_method %></td>
-        <td><%= request.created_at %></td>
-        <td><%= link_to 'Show', request %></td>
-        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', "/bins/#{@bin.url}/edit" %> |
-<%= link_to 'Back', bins_path %>
+<div class="flex flex-row-reverse py-2">
+  <button class='bg-indigo-600 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded'>
+    <%= link_to 'Edit', "/bins/#{@bin.url}/edit" %>
+  </button>
+  
+  <button class='bg-pink-600 hover:bg-pink-900 text-white font-bold py-2 px-4 rounded mr-2'>
+    <%= link_to 'Back', "/bins" %>
+  </button>
+</div>
+
+<div class="flex flex-col py-2">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-300 bg-gray-200">
+          <thead class="bg-gray-200">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Timestamp
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                HTTP Method
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-right">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200" id="request-table">
+          <% @requests.each do |request| %>
+            <div>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <%= request.created_at %>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <%= request.http_method %>
+                  </span>
+                </td>
+
+
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a href="" data-id="<%= request.id %>" class="text-indigo-600 hover:text-indigo-900">
+                      Show
+                  </a>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-indigo-600 hover:text-indigo-900" %>
+                </td>
+              </tr>
+              <tr data-id="request-<%= request.id %>" class="hidden">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      Payload:
+                    </div>
+                  </div>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <%= JSON.parse request.payload %>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="">
+                </td>
+                <td class="">
+                </td>
+              </tr>
+            </div>
+          <% end %>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

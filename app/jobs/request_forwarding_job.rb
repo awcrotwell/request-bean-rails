@@ -5,7 +5,7 @@ class RequestForwardingJob < ApplicationJob
     uri = URI(webhook_url) # TODO: don't break if not prefixed with http://
     req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
     req.body = request.payload
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
     end
   end
